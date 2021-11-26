@@ -1,6 +1,6 @@
 import { CommandHandler, EventBus, ICommandHandler } from "@nestjs/cqrs";
-import { AddUserEvent } from "src/users/events/add-user.event";
-import { usersMock } from "src/users/users.mock";
+import { AddUserEvent } from "../../events/user-added.event";
+import { usersMock } from "../../users.mock";
 import { AddUserCommand } from "../impl/add-user.command";
 
 @CommandHandler(AddUserCommand)
@@ -16,6 +16,5 @@ export  class AddUserHandler implements ICommandHandler<AddUserCommand> {
         this.eventBus.publish(
             new AddUserEvent(this.user)
         );
-        return this.user;
     }
 }
