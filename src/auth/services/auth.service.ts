@@ -10,7 +10,7 @@ export class AuthService {
   public users = usersMock;
 
   async validateUser(username: string, pass: string): Promise<any> {
-    const user = await this.users.find(user => user.username === username);
+    const user = await this.users.find(user => user.name === username);
     if (user && user.password === pass) {
       const { password, ...result } = user;
       return result;

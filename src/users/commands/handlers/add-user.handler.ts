@@ -10,14 +10,12 @@ export  class AddUserHandler implements ICommandHandler<AddUserCommand> {
     
     async execute(command: AddUserCommand){
         const { users } = command;
-        console.log('hereeee');
-        if(users.userId && users.username && users.password) {
+        if(users.name && users.password) {
             this.user.push(users);
         }
         this.eventBus.publish(
             new AddUserEvent(this.user)
         );
-        console.log(this.user)
         return this.user;
     }
 }

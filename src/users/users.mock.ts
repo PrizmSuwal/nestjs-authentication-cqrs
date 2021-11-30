@@ -1,17 +1,17 @@
 export const usersMock = [
     {
-        userId: 1,
-        username: 'john',
+        name: 'john',
+        email: 'ram@gmail.com',
         password: 'changeme',
     },
     {
-        userId: 2,
-        username: 'chris',
+        name: 'chris',
+        email: 'chris@gmail.com',
         password: 'secret',
     },
     {
-        userId: 3,
-        username: 'maria',
+        name: 'maria',
+        email: 'maria@gmail.com',
         password: 'guess',
     },
 ];

@@ -5,7 +5,7 @@ import { AddUserCommand } from '../commands/impl/add-user.command';
 import { GetAllUsers } from '../queries/get-user';
 import { GetAllUsersHandler } from '../queries/handlers/get-user.handlers';
 import { usersDTO } from '../users.dto';
-import { usercontroller } from '../users.service';
+// import { UsersService } from '../users.service';
 import { UsersController } from './user.controller';
 
 describe('UsersController', () => {
@@ -21,7 +21,7 @@ describe('UsersController', () => {
         GetAllUsers,
         GetAllUsersHandler, 
         {
-          provide: usercontroller,
+          provide: UsersService,
           useValue: {
             addUser: jest.fn().mockImplementation((user: usersDTO) =>
               Promise.resolve({ 
