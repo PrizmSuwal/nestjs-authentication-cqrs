@@ -17,6 +17,7 @@ import { Users } from './users/entities/user.entity';
         password: "1234",
         database: "test",
         entities: [Users],
+        synchronize: true
     }),
   ],
   controllers: [AppController],
