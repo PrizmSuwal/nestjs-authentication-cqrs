@@ -1,11 +1,11 @@
-import { Body, Controller, Get, Inject, Injectable, Param, Post, Query, Request, Response } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Injectable, Param, Patch, Post } from '@nestjs/common';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { usersDTO } from '../users.dto';
-import { AddUserCommand } from '../commands/impl/add-user.command';
-import { GetAllUsers } from '../queries/get-user';
-import { usersMock } from '../users.mock';
-import { FindUserById } from '../queries/find-user-by-id';
+import { FindAllUsersQuery } from '../queries/find-all-users.query';
+import { FindUserByIdQuery } from '../queries/find-user-by-id.query';
 import { CreateUserCommand } from '../commands/impl/create-user.command';
+import { UpdateUserByIdCommand } from '../commands/impl/update-user-by-id.command';
+import { DeleteUserByIdCommand } from '../commands/impl/delete-user-by-id.command';
 
 @Injectable()
 @Controller('users')
@@ -14,21 +14,6 @@ export class UsersController {
         private commandBus: CommandBus,
         private queryBus: QueryBus,
     ){}
-    public users = usersMock;
-
-    @Post('add')
-    async addUser(@Body() users: usersDTO) {
-        return await this.commandBus.execute(
-            new AddUserCommand(users),
-        );
-    }
-
-    @Get('list')
-    async listUser(){
-        return await this.queryBus.execute(
-            new GetAllUsers(this.users),
-        );
-    }
 
     @Post('create')
     async createUser(@Body() users: usersDTO) {
@@ -37,10 +22,36 @@ export class UsersController {
         );
     }
 
+    @Patch('edit/:id')
+    async updateUser(
+        @Param('id') id: number,
+        @Body() users: usersDTO
+    ){
+        return await this.commandBus.execute(
+            new UpdateUserByIdCommand(id, users),
+        )
+    }
+
+    @Delete('delete/:id')
+    async deleteUser(
+        @Param('id') id: number
+    ){
+        return await this.commandBus.execute(
+            new DeleteUserByIdCommand(id),
+        )
+    }
+
+    @Get('list')
+    async listUser(){
+        return await this.queryBus.execute(
+            new FindAllUsersQuery(),
+        );
+    }
+
     @Get(':id')
     async getUserById(@Param('id') id: number) {
         return await this.queryBus.execute(
-            new FindUserById(id),
+            new FindUserByIdQuery(id),
         );
     }
 }

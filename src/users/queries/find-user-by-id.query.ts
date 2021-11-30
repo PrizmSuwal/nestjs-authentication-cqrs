@@ -1,4 +1,4 @@
-export class FindUserById {
+export class FindUserByIdQuery {
     constructor ( 
         public readonly id: number,
     ) {}
