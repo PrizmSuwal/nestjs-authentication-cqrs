@@ -1,13 +1,13 @@
-import { Users } from "src/users/entities/user.entity";
 import { database } from "./database";
 
 export const config = {
     ...database,
-    entities: [Users],
+    entities: [__dirname+'/../**/*.entity{.ts,.js}'],
     synchronize: false,
+    migrationsRun: true,
     migrationsTableName: "migrations",
     migrations: [
-       'src/migrations/*.ts'
+        __dirname+'/../migrations/*.{.ts,.js}'
     ],
     cli: {
         migrationsDir: "src/migrations"
