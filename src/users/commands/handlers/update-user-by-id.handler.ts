@@ -1,6 +1,6 @@
 import { CommandHandler, ICommandHandler } from "@nestjs/cqrs";
 import { InjectRepository } from "@nestjs/typeorm";
-import { Users } from "src/users/entities/user.entity";
+import { Users } from "../../../users/entities/user.entity";
 import { Repository } from "typeorm";
 import { UpdateUserByIdCommand } from "../impl/update-user-by-id.command";
 

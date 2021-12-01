@@ -1,4 +1,4 @@
-import { usersDTO } from "src/users/users.dto";
+import { usersDTO } from "../../../users/users.dto";
 
 export class CreateUserCommand {
     constructor ( 
