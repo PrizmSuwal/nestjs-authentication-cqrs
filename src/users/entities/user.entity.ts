@@ -22,4 +22,10 @@ export class Users{
         nullable: true
     })
     password!: string;
+
+    @Column({
+        nullable: false,
+        unique: true,
+    })
+    authId: string;
 }
